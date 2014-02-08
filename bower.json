@@ -1,0 +1,14 @@
+{
+  "name": "angular-fblib",
+  "version": "0.0.1",
+  "description": "Useful set of Facebook functions as an angular service",
+  "main": "angular-fblib.js",
+  "ignore": [
+    "bower_components",
+    "index.html"
+  ],
+  "dependencies": {
+    "angular-easyfb": ""
+    },
+  "devDependencies": {}
+}
