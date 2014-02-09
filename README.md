@@ -29,3 +29,32 @@ angular.module('myApp', ['angular-fblib'])
 
 If your app only needs basic permissions you can leave out the latter.
 
+## Usage
+All methods return promises.
+
+#### connect()
+Logs in with the permissions provided in the config function.
+
+```js
+Facebook.connect().then(function() {
+  console.log('Connected!');
+});
+```
+
+#### getUser(fields)
+Gets the logged in user with the specified fields
+
+```js
+Facebook.getUser(['first_name', 'last_name']).then(function(user) {
+  console.log('Your name is: ' + user.first_name + " " + user.last_name);
+});
+```
+
+#### getUserFriends()
+Gets the logged in user's friends
+
+```js
+Facebook.getUserFriends.then(function(friends) {
+  // Handle friends...
+});
+```

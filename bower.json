@@ -8,7 +8,7 @@
     "index.html"
   ],
   "dependencies": {
-    "angular-easyfb": ""
+    "angular-easyfb": "0.2.2"
     },
   "devDependencies": {}
 }
