@@ -10,24 +10,36 @@ cd angular-fblib
 bower install
 ```
 
-## Configuration
-Add angular-fblib as a dependency to your module. In the config function, use $FBProvider.setInitParams to set your Facebook app's id and FacebookProvider.setScope to set any permissions needed by your app which are not in the basic permissions.
+## Getting started
+Include angular-easyfb and angular-fblib scripts:
+
+```html
+<script src="path/to/angular-easyfb.min.js"></script>
+<script src="path/to/angular-fblib.js"></script>
+```
+
+Add fblib as a dependency to your module:
 
 ```js
-angular.module('myApp', ['angular-fblib'])
-  .config(['$FBProvider', 'FacebookProvider', function($FBProvider, FacebookProvider) {
+angular.module('myApp', ['fblib']);
+```
 
-    // Set app id
-    $FBProvider.setInitParams({
-      appId: "123456789101112"
+## Configuration
+In the config function, use FacebookProvider.settings() to set your Facebook app's id and any permissions needed by your app which are not in the basic permissions.
+
+```js
+angular.module('myApp', ['fblib'])
+  .config(['FacebookProvider', function(FacebookProvider) {
+
+    FacebookProvider.settings({
+      appId: "123456789101112",
+      scope: ['email', 'user_birthday']
     });
-    
-    // Set permission scope
-    FacebookProvider.setScope(['email', 'user_birthday']);
+  
   }]);
 ```
 
-If your app only needs basic permissions you can leave out the latter.
+If your app only needs basic permissions set the scope to an empty array.
 
 ## Usage
 All methods return promises.
