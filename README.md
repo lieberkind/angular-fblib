@@ -11,13 +11,13 @@ bower install
 ```
 
 ## Configuration
-Add angular-fblib as a dependency to your module. In the config function, use $FBProvider.setInitParams to set your Facebook app's id and FacebookProvider to set the permissions needed by your app.
+Add angular-fblib as a dependency to your module. In the config function, use $FBProvider.setInitParams to set your Facebook app's id and FacebookProvider.setScope to set any permissions needed by your app which are not in the basic permissions.
 
 ```javascript
 angular.module('myApp', ['angular-fblib'])
   .config(['$FBProvider', 'FacebookProvider', function($FBProvider, FacebookProvider) {
     $FBProvider.setInitParams({
-      appId: "588439911249155"
+      appId: "123456789101112"
     });
     
     FacebookProvider.setScope(['email', 'user_birthday']);
