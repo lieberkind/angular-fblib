@@ -12,7 +12,7 @@ angular.module('fblib', ['ezfb'])
   |
    */
   .provider('Facebook', function() {
-    var _scope = [];
+    var _scope = [], _appId, _settings;
 
     return {
 
@@ -21,8 +21,8 @@ angular.module('fblib', ['ezfb'])
       | Setters
       |------------------------------------------------
        */
-      setScope: function(scope) {
-        _scope = scope;
+      settings: function(settings) {
+        _settings = settings;
       },
 
       /*
@@ -35,9 +35,18 @@ angular.module('fblib', ['ezfb'])
         var api = {
 
           /**
+           * Gets the app id
+           * 
+           * @return {string}
+           */
+          getAppId: function() {
+            return _settings.appId;
+          },
+
+          /**
            * Connect to Facebook with the given permissions
            * 
-           * @return promise
+           * @return {promise}
            */
           connect: function() {
             var deferred = $q.defer();
@@ -46,7 +55,7 @@ angular.module('fblib', ['ezfb'])
               if (response.status === 'connected') {
                 deferred.resolve();
               } else {
-                var scope_string = _scope.join();
+                var scope_string = _settings.scope.join();
 
                 $FB.login(function(response) {
                   if (response.authResponse) {
@@ -64,7 +73,7 @@ angular.module('fblib', ['ezfb'])
           /**
            * Gets the current Facebook user with the specified fields
            * 
-           * @return promise object
+           * @return {promise}
            */
           getUser: function(fields) {
             var deferred = $q.defer();
@@ -84,7 +93,7 @@ angular.module('fblib', ['ezfb'])
           /**
            * Gets the current Facebook user's friends
            * 
-           * @return promise object
+           * @return {promise}
            */
           getUserFriends: function() {
             var deferred = $q.defer();
@@ -103,7 +112,7 @@ angular.module('fblib', ['ezfb'])
           /**
            * Shows the Post To Wall dialog
            * 
-           * @return promise object
+           * @return {promise}
            */
           postToWall: function(settings) {
 
@@ -132,4 +141,11 @@ angular.module('fblib', ['ezfb'])
         return api;
       }]
     }
-  });
+  })
+
+  .run(['$FB', 'Facebook', function($FB, Facebook) {
+    // "Forward" appId to $FB service
+    $FB.init({
+      appId: Facebook.getAppId()
+    });
+  }]);

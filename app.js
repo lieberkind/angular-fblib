@@ -6,11 +6,17 @@
 angular.module('FBLibTest', ['fblib'])
   .config(['$FBProvider', 'FacebookProvider', function($FBProvider, FacebookProvider) {
 
-    $FBProvider.setInitParams({
-      appId: "588439911249155"
+    // $FBProvider.setInitParams({
+    //   appId: "588439911249155"
+    // });
+
+    FacebookProvider.settings({
+      appId: '588439911249155',
+      scope: ['email', 'user_birthday']
     });
 
-    FacebookProvider.setScope(['email', 'user_birthday']);
+    // FacebookProvider.setAppId('588439911249155');
+    // FacebookProvider.setScope(['email', 'user_birthday']);
 
   }])
 
