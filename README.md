@@ -2,7 +2,7 @@
 A useful set of functions for interacting with Facebook provided as an angular service. Depends on the excellent angular-easyfb module by pc035860 (https://github.com/pc035860/angular-easyfb).
 
 ## Installation
-To install FBLib clone the repo and install angular-easyfb via Bower:
+Clone the repo and install angular-easyfb via Bower:
 
 ```
 git clone git@github.com:lieberkind/angular-fblib.git
