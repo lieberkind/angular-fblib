@@ -53,7 +53,7 @@ Facebook.getUser(['first_name', 'last_name']).then(function(user) {
 Gets the logged in user's friends
 
 ```js
-Facebook.getUserFriends.then(function(friends) {
+Facebook.getUserFriends().then(function(friends) {
   // Handle friends...
 });
 ```
