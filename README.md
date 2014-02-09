@@ -69,3 +69,9 @@ Facebook.getUserFriends().then(function(friends) {
   // Handle friends...
 });
 ```
+
+## Todo
+Methods will be added regularly. Furthermore the following things will be prioritized:
+
+- Minification
+- Testing
