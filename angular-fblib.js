@@ -11,7 +11,7 @@ angular.module('fblib', ['ezfb'])
   | can be found on https://github.com/pc035860/angular-easyfb
   |
    */
-  .provider('FBLib', function() {
+  .provider('Facebook', function() {
     var _scope = [];
 
     return {
@@ -73,6 +73,25 @@ angular.module('fblib', ['ezfb'])
             api.connect().then(function() {
               $FB.api("/me?fields=" + fields_string, function(user) {
                 deferred.resolve(user);
+              });
+            }, function() {
+              deferred.reject();
+            });
+
+            return deferred.promise;
+          },
+
+          /**
+           * Gets the current Facebook user's friends
+           * 
+           * @return promise object
+           */
+          getUserFriends: function() {
+            var deferred = $q.defer();
+
+            api.connect().then(function() {
+              $FB.api('/me/friends', function(friends) {
+                deferred.resolve(friends);
               });
             }, function() {
               deferred.reject();

@@ -4,25 +4,26 @@
 * Description
 */
 angular.module('FBLibTest', ['fblib'])
-  .config(['$FBProvider', 'FBLibProvider', function($FBProvider, FBLibProvider) {
+  .config(['$FBProvider', 'FacebookProvider', function($FBProvider, FacebookProvider) {
 
     $FBProvider.setInitParams({
       appId: "588439911249155"
     });
 
-    FBLibProvider.setScope(['email', 'user_birthday']);
+    FacebookProvider.setScope(['email', 'user_birthday']);
 
   }])
 
-  .controller('MainCtrl', ['$scope', 'FBLib', '$FB', function($scope, FBLib, $FB) {
-    // $FB.api("/me?fields=" + 'email,birthday', function(user) {
-    //   console.log(user);
-    // });
+  .controller('MainCtrl', ['$scope', 'Facebook', '$FB', function($scope, Facebook, $FB) {
 
-    FBLib.getUser(['first_name', 'email', 'birthday']).then(function(user) {
+    Facebook.getUser(['first_name', 'email', 'birthday']).then(function(user) {
       console.log(user);
     });
 
-    FBLib.postToWall({
+    Facebook.postToWall({
+    });
+
+    Facebook.getUserFriends().then(function(friends) {
+      console.log(friends);
     });
   }]);
