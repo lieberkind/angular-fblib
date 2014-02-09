@@ -16,10 +16,13 @@ Add angular-fblib as a dependency to your module. In the config function, use $F
 ```javascript
 angular.module('myApp', ['angular-fblib'])
   .config(['$FBProvider', 'FacebookProvider', function($FBProvider, FacebookProvider) {
+
+    // Set app id
     $FBProvider.setInitParams({
       appId: "123456789101112"
     });
     
+    // Set permission scope
     FacebookProvider.setScope(['email', 'user_birthday']);
   }]);
 ```
