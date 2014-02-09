@@ -34,7 +34,6 @@ All methods return promises.
 
 #### connect()
 Logs in with the permissions provided in the config function.
-
 ```js
 Facebook.connect().then(function() {
   console.log('Connected!');
