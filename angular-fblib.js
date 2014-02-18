@@ -30,7 +30,7 @@ angular.module('fblib', ['ezfb'])
       | $get
       |------------------------------------------------
        */
-      $get: ['$FB', '$q', function($FB, $q) {
+      $get: ['$FB', '$q', '$http', function($FB, $q, $http) {
 
         var api = {
 
@@ -131,6 +131,37 @@ angular.module('fblib', ['ezfb'])
                 deferred.resolve();
               } else {
                 deferred.reject();
+              }
+            });
+
+            return deferred.promise;
+          },
+
+          /**
+           * Get a profile picture
+           * 
+           * @param  {int|string} fb_id  
+           * @param  {int|string} width 
+           * @param  {int|string} height
+           * @param  {enum(square,small,normal,large)} type
+           * @return {promise}
+           */
+          profilePicture: function(fb_id, width, height, type) {
+            var deferred = $q.defer();
+            
+            // Options to send to FB api
+            var options = {
+              redirect: false,
+              type: type,
+              height: height || undefined,
+              width: width || undefined
+            };
+
+            $FB.api('/' + fb_id + '/picture', options, function(response) {
+              if(response && !response.error) {
+                deferred.resolve(response);
+              } else {
+                deferred.reject(response.error);
               }
             });
 

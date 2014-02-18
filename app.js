@@ -22,14 +22,38 @@ angular.module('FBLibTest', ['fblib'])
 
   .controller('MainCtrl', ['$scope', 'Facebook', '$FB', function($scope, Facebook, $FB) {
 
-    Facebook.getUser(['first_name', 'email', 'birthday']).then(function(user) {
-      console.log(user);
-    });
+    $scope.user = {};
 
-    Facebook.postToWall({
-    });
+    var getUser = function() {
+      return Facebook.getUser(['first_name', 'email', 'birthday']).then(function(user) {
+        console.log(user);
+        $scope.user = user;
 
-    Facebook.getUserFriends().then(function(friends) {
-      console.log(friends);
-    });
+        return user.id;
+      });
+    };
+
+    var getUserProfilePicture = function(user_id) {
+      return Facebook.profilePicture(user_id, null, null, 'normal').then(function(picture) {
+        console.log(picture);
+      })
+    };
+
+    var getUserFriends = function() {
+      return Facebook.getUserFriends().then(function(friends) {
+        console.log(friends);
+      });
+    };
+
+    var postToWall = function() {
+      return Facebook.postToWall({});
+    };
+
+    (function() {
+      getUser()
+        .then(getUserProfilePicture)
+        .then(getUserFriends)
+        .then(postToWall);
+    }());
+
   }]);
